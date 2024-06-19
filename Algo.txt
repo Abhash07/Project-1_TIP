@@ -1,0 +1,11 @@
+Mindmaps for Coding
+
+
+1. Identify which vulnearbility to do
+
+Step 1: Identify the target web application to exploit
+Step 2: Identify the fields in which to use the attack vectors
+Step 3: Harcode the web application URL and attack vectors
+Step 4: Seperate Payloads and Mainfunction from the rest of the code i.e. Make a seperate function to run the code and another seperate file for attack vectors
+Step 5: Use Python as the programming language
+Step 6: 
