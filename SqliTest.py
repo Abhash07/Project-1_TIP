@@ -9,7 +9,7 @@ params = {
     'Submit': 'Submit',
 }
 headers = {
-    'Cookie': 'PHPSESSID=<your_session_id>; security=low',
+    'Cookie': 'PHPSESSID=rkg47evun26n2jg6vjhrg3vlk8; security=low',
 }
 
 # Obtain the user token
