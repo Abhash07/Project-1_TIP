@@ -1,0 +1,29 @@
+
+Test1.py
+Purpose: Exploit SSRF vulnerabilities by targeting a specific endpoint.
+
+Components:
+Configuration: Defines target URLs and headers.
+Function exploit_ssrf: Sends requests to the vulnerable endpoint.
+Main Function: Orchestrates the exploitation process.
+
+Test2.py
+Purpose: Automate the scanning for SSRF vulnerabilities.
+
+Components:
+Functions login_dvwa, get_all_forms, get_details: Handle login and form extraction.
+Function is_vuln: Determines if a response indicates an SSRF vulnerability.
+Function scan_ssrf: Scans URLs and forms for SSRF vulnerabilities.
+Function start_scan: Manages threading and URL processing.
+
+Test3.py
+Purpose: Comprehensive scanning and exploitation tool with additional advanced payloads.
+
+Components:
+
+Functions login_dvwa, get_all_forms, get_details: Same as in Test2.py.
+Function is_vuln: Determines SSRF vulnerability.
+Function scan_ssrf: Handles URL and form scanning.
+Function test_advanced_ssrf: Tests advanced payloads for SSRF.
+Function start_scan: Manages scanning process with threading.
+Function start_ssrf_scan: Initializes the scanning environment and starts the scan.

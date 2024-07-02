@@ -1,0 +1,8 @@
+
+with open("vuln.txt", "w") as f:
+    f.write("# vuln.txt\n\n")
+    f.write("# This file will be used to log URLs that have SSRF vulnerabilities.\n")
+    f.write("# The script will append new URLs to this file as it finds them.\n\n")
+
+# Proceed with the rest of the script
+start_ssrf_scan()
