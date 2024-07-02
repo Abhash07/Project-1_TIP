@@ -24,6 +24,6 @@ Components:
 Functions login_dvwa, get_all_forms, get_details: Same as in Test2.py.
 Function is_vuln: Determines SSRF vulnerability.
 Function scan_ssrf: Handles URL and form scanning.
-Function test_advanced_ssrf: Tests advanced payloads for SSRF.
+Function test_advanced_ssrf: Exploits using advanced payloads.
 Function start_scan: Manages scanning process with threading.
-Function start_ssrf_scan: Initializes the scanning environment and starts the scan.
+Function start_ssrf_scan: Initializes the scanning environment and starts the scan and exploit it.
