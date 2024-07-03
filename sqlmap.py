@@ -37,11 +37,7 @@ def get_session_cookies():
             cookies = session.cookies.get_dict()
             
             # Set security level to low
-            security_payload = {
-                'security': 'low',
-                'seclev_submit': 'Submit'
-            }
-            session.post(security_url, data=security_payload)
+            set_security_level_to_low(session)
             
             # Return updated cookies
             cookies = session.cookies.get_dict()
@@ -49,6 +45,24 @@ def get_session_cookies():
         else:
             print("Login failed. Check your credentials and DVWA configuration.")
             return None
+
+# Function to set security level to low
+def set_security_level_to_low(session):
+    response = session.get(security_url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    
+    # Find the security form and user token
+    security_form = soup.find('form')
+    user_token = security_form.find('input', {'name': 'user_token'})['value']
+    
+    # Set security level to low
+    security_payload = {
+        'security': 'low',
+        'seclev_submit': 'Submit',
+        'user_token': user_token
+    }
+    session.post(security_url, data=security_payload)
+    print("Security level set to low.")
 
 # Running SQLMap to detect SQL injection
 def run_sqlmap(target_url, cookies):
