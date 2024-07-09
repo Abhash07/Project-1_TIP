@@ -41,13 +41,12 @@ def get_details(form):
     details["inputs"] = inputs
     return details
 
-def is_vuln(response):
+def is_misconfigured(response):
     indicators = {
-        "internal",
-        "localhost",
-        "169.254.",
-        "0.0.0.0",
-        "127.0.0.1"
+        "config_error",
+        "misconfigured",
+        "unauthorized",
+        "access_denied"
     }
     try:
         for indicator in indicators:
@@ -59,16 +58,16 @@ def is_vuln(response):
     except requests.exceptions.RequestException:
         pass
 
-def scan_ssrf(url):
+def scan_misconfiguration(url):
     f = open("vuln.txt", "a+")
     try:
-        payloads = ["http://localhost", "http://127.0.0.1", "http://169.254.169.254"]
+        payloads = ["http://misconfigured-url", "http://127.0.0.1/misconfig", "http://169.254.169.254/misconfig"]
         for payload in payloads:
-            new_url = f"{url}?url={payload}"
+            new_url = f"{url}?config={payload}"
             print(f"{Fore.WHITE}[CONSOLE] Trying: {new_url}")
             r = s.get(new_url)
-            if is_vuln(r):
-                print(f"{Fore.GREEN}[CONSOLE] Found SSRF vulnerability! " + new_url)
+            if is_misconfigured(r):
+                print(f"{Fore.GREEN}[CONSOLE] Found Security Misconfiguration vulnerability! " + new_url)
                 f.write(new_url + "\n")
                 f.close()
                 return
@@ -96,9 +95,9 @@ def scan_ssrf(url):
                     elif form_details["method"] == "get":
                         r = s.get(url, params=data)
 
-                    if is_vuln(r):
+                    if is_misconfigured(r):
                         f.write(url + "\n")
-                        print(f"{Fore.GREEN}[CONSOLE] Found SSRF vulnerability! " + url)
+                        print(f"{Fore.GREEN}[CONSOLE] Found Security Misconfiguration vulnerability! " + url)
                         return
                     else:
                         pass
@@ -116,7 +115,7 @@ def start_scan():
                 if checked < len(R):
                     for url in R:
                         time.sleep(delay)
-                        t = threading.Thread(target=scan_ssrf, args=(url.strip(),))
+                        t = threading.Thread(target=scan_misconfiguration, args=(url.strip(),))
                         t.start()
                         checked += 1
                         threads.append(t)
@@ -129,7 +128,7 @@ def start_scan():
     except requests.exceptions.RequestException:
         pass    
 
-def start_ssrf_():
+def start_misconfig_scan():
     global thr, delay, checked, s
     warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
@@ -151,5 +150,5 @@ def start_ssrf_():
     checked = 0
     start_scan()
 
-# Start the SSRF scan process
-start_ssrf_()
+# Start the Misconfiguration scan process
+start_misconfig_scan()
