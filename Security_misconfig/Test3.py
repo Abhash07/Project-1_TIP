@@ -9,7 +9,18 @@ from colorama import Fore
 # Configuration
 base_url = "http://127.0.0.1:42001/"
 vuln_url = base_url + "misconfigured-endpoint"
-misconfigured_url = "http://127.0.0.1:80/admin"  # Misconfigured service we want to access
+misconfigured_urls = [
+    "http://127.0.0.1:80/admin",
+    "http://127.0.0.1:80/",
+    "http://127.0.0.1:80/secret",
+    "http://169.254.169.254/latest/meta-data/",
+    base_url + "default-password",
+    base_url + "outdated-software",
+    base_url + "unprotected-files",
+    base_url + "unused-features",
+    base_url + "security-misconfig",
+    base_url + "directory-traversal?path=../../etc/passwd"
+]
 
 # Headers
 headers = {
@@ -57,10 +68,13 @@ def get_details(form):
 
 def is_misconfigured(response):
     indicators = {
-        "config_error",
-        "misconfigured",
-        "unauthorized",
-        "access_denied"
+        "default password",
+        "outdated software",
+        "unprotected",
+        "unused features",
+        "security misconfig",
+        "directory traversal",
+        "access denied"
     }
     try:
         for indicator in indicators:
@@ -75,7 +89,14 @@ def is_misconfigured(response):
 def scan_misconfiguration(url):
     f = open("vuln.txt", "a+")
     try:
-        payloads = ["http://misconfigured-url", "http://127.0.0.1/misconfig", "http://169.254.169.254/misconfig"]
+        payloads = [
+            "http://default-password",
+            "http://outdated-software",
+            "http://unprotected-files",
+            "http://unused-features",
+            "http://security-misconfig",
+            "http://directory-traversal?path=../../etc/passwd"
+        ]
         for payload in payloads:
             new_url = f"{url}?config={payload}"
             print(f"{Fore.WHITE}[CONSOLE] Trying: {new_url}")
