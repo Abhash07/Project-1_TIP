@@ -16,11 +16,12 @@ def login_dvwa(session, url, username, password):
     }
     session.post(login_url, data=login_data)
 
+#gettheform loaded
 def get_all_forms(url):
     r = s.get(url)
     soup = BeautifulSoup(r.content, "lxml")
     return soup.find_all("form")
-
+#feth details of the form 
 def get_details(form):
     details = {}
     try:

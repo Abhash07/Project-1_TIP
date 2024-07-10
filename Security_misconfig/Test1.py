@@ -2,6 +2,8 @@ import requests
 
 # Configuration
 base_url = "http://127.0.0.1:42001/"
+
+#done below to fetch resonse and print it in text
 vuln_url = base_url + "misconfigured-endpoint"
 test_urls = [
     "http://127.0.0.1:80/admin",
