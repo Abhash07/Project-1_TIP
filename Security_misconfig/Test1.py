@@ -21,6 +21,7 @@ headers = {
     'Cookie': 'PHPSESSID=rkg47evun26n2jg6vjhrg3vlk8; security=low',
 }
 
+#write all the mainfunctions here 
 def test_misconfiguration(target_url):
     params = {
         'config': target_url  # The parameter name might be different depending on the application
