@@ -3,6 +3,8 @@ from default_cred import check_default_credentials
 from sensitive import check_sensitive_files
 from error_handling import check_error_handling
 from set_security import set_dvwa_security
+from openports import check_open_ports
+from missing_conf import check_security_headers, check_https_enforcement
 import requests
 
 def check_security_misconfigurations(base_url):
@@ -24,6 +26,15 @@ def check_security_misconfigurations(base_url):
 
         print("Checking for error handling...")
         check_error_handling(session, base_url)
+        
+        print("Checking for open ports...")
+        check_open_ports(host)
+        
+        print("Checking for missing security headers...")
+        check_security_headers(base_url)
+
+        print("Checking for HTTPS enforcement...")
+        check_https_enforcement(base_url)
 
     except Exception as e:
         print(f"An error occurred while testing for security misconfigurations: {e}")
@@ -31,4 +42,5 @@ def check_security_misconfigurations(base_url):
 # Example usage
 if __name__ == "__main__":
     base_url = "http://127.0.0.1/DVWA/"  # Adjusted for local DVWA instance
+    host = "127.0.0.1"  # Adjusted for local DVWA instance
     check_security_misconfigurations(base_url)
