@@ -7,6 +7,7 @@ Unprotected files and directories
 Unused features
 Security misconfigurations
 Directory traversal
+
 Key Functions:
 test_misconfiguration(target_url): Sends a GET request to the specified target_url with configuration parameters to see if any misconfiguration can be detected.
 main(): Iterates over a list of test URLs, calling test_misconfiguration for each to check for vulnerabilities.
