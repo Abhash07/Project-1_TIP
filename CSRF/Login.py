@@ -38,7 +38,7 @@ def get_session_cookies(base_url, dvwa_username, dvwa_password):
                 print("Login failed. Check your credentials and DVWA configuration.")
                 return None
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred during login: {e}")
         return None
 
 def set_security_level_to_low(session, security_url):
