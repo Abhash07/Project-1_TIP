@@ -6,11 +6,12 @@ from bs4 import BeautifulSoup
 # URL of the DVWA application
 base_url = "http://192.168.64.3/DVWA/"
 login_url = base_url + "login.php"
-csrf_urls = [
-    base_url + "vulnerabilities/csrf/",
-    base_url + "vulnerabilities/csrf/submit.php"
-]
 security_url = base_url + "security.php"
+test_urls = [
+    base_url + "config/",
+    base_url + "includes/",
+    base_url + "phpinfo.php",
+]
 
 # DVWA login credentials
 dvwa_username = "admin"
@@ -79,42 +80,44 @@ def set_security_level_to_low(session):
     except Exception as e:
         print(f"An error occurred while setting security level: {e}")
 
-# Function to run ZAP for CSRF testing
-def run_zap_csrf_test(target_urls, cookies):
-    if cookies:
-        try:
-            # Prepare cookies string for ZAP
-            cookie_string = "; ".join([f"{key}={value}" for key, value in cookies.items()])
-            
-            # Start the ZAP scan
-            for target_url in target_urls:
-                zap_scan_url = f"{zap_base_url}/JSON/ascan/action/scan/?apikey={zap_api_key}&url={target_url}&recurse=true&inScopeOnly=false&scanPolicyName=&method=POST&postData=&contextId=&scanHeaders=true&cookie={cookie_string}"
-                response = requests.get(zap_scan_url)
-                scan_id = response.json().get("scan")
-                print(f"Started ZAP scan for {target_url} with scan ID: {scan_id}")
-                
-                # Poll ZAP for scan status
-                zap_scan_status_url = f"{zap_base_url}/JSON/ascan/view/status/?scanId={scan_id}"
-                while True:
-                    status_response = requests.get(zap_scan_status_url)
-                    status = status_response.json().get("status")
-                    if status == "100":
-                        print(f"ZAP scan for {target_url} completed.")
-                        break
-                    print(f"ZAP scan for {target_url} is {status}% complete.")
-                    time.sleep(5)
-                
-                # Get scan results
-                zap_results_url = f"{zap_base_url}/JSON/core/view/alerts/?baseurl={target_url}&apikey={zap_api_key}"
-                results_response = requests.get(zap_results_url)
-                alerts = results_response.json().get("alerts", [])
-                for alert in alerts:
-                    print(f"Alert: {alert.get('alert')}, Risk: {alert.get('risk')}, URL: {alert.get('url')}, Param: {alert.get('param')}")
-        except Exception as e:
-            print(f"An error occurred during ZAP scan: {e}")
-    else:
-        print("No valid session cookies. ZAP scan will not run.")
+# Function to check for security misconfigurations
+def check_security_misconfigurations(session, test_urls):
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        
+        # Check for weak password policy
+        response = session.get(base_url + "vulnerabilities/brute/", headers=headers)
+        if "password" in response.text:
+            print("Weak password policy detected.")
+        
+        # Check for insecure HTTP headers
+        response = session.get(base_url, headers=headers)
+        if "X-Content-Type-Options" not in response.headers:
+            print("Missing X-Content-Type-Options header.")
+        if "X-Frame-Options" not in response.headers:
+            print("Missing X-Frame-Options header.")
+        if "Content-Security-Policy" not in response.headers:
+            print("Missing Content-Security-Policy header.")
+        
+        # Check for exposed sensitive files or directories
+        for url in test_urls:
+            response = session.get(url, headers=headers)
+            if response.status_code == 200:
+                print(f"Exposed sensitive file or directory detected: {url}")
+        
+        # Check for default credentials
+        if dvwa_username == "admin" and dvwa_password == "password":
+            print("Default credentials are being used.")
+        
+    except Exception as e:
+        print(f"An error occurred during security misconfigurations check: {e}")
 
 if __name__ == "__main__":
     cookies = get_session_cookies()
-    run_zap_csrf_test(csrf_urls, cookies)
+    if cookies:
+        with requests.Session() as session:
+            for cookie_name, cookie_value in cookies.items():
+                session.cookies.set(cookie_name, cookie_value)
+            check_security_misconfigurations(session, test_urls)
