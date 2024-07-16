@@ -1,6 +1,6 @@
 import requests
 
-def check_directory_listing(base_url):
+def check_directory_listing(session, base_url):
     directories = [
         base_url,
         base_url + 'images/',
@@ -9,7 +9,7 @@ def check_directory_listing(base_url):
         base_url + 'backup/'
     ]
     for directory in directories:
-        response = requests.get(directory)
+        response = session.get(directory)
         if "Index of" in response.text:
             print(f"Directory listing enabled at {directory}")
         else:
@@ -17,5 +17,6 @@ def check_directory_listing(base_url):
 
 # Example usage
 if __name__ == "__main__":
-    base_url = "http://127.0.0.1/dvwa/"  # Adjusted for local DVWA instance
-    check_directory_listing(base_url)
+    session = requests.Session()
+    base_url = "http://127.0.0.1/DVWA/"  # Adjusted for local DVWA instance
+    check_directory_listing(session, base_url)

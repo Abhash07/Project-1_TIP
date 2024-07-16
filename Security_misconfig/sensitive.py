@@ -1,6 +1,6 @@
 import requests
 
-def check_sensitive_files(base_url):
+def check_sensitive_files(session, base_url):
     sensitive_files = [
         '.git',
         '.env',
@@ -19,7 +19,7 @@ def check_sensitive_files(base_url):
         'secrets.yml'
     ]
     for file in sensitive_files:
-        response = requests.get(base_url + file)
+        response = session.get(base_url + file)
         if response.status_code == 200:
             print(f"Sensitive file accessible: {base_url}{file}")
         else:
@@ -27,5 +27,6 @@ def check_sensitive_files(base_url):
 
 # Example usage
 if __name__ == "__main__":
-    base_url = "http://127.0.0.1/dvwa/"  # Adjusted for local DVWA instance
-    check_sensitive_files(base_url)
+    session = requests.Session()
+    base_url = "http://127.0.0.1/DVWA/"  # Adjusted for local DVWA instance
+    check_sensitive_files(session, base_url)
