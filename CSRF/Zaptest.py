@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # URL of the DVWA application
-base_url = "http://192.168.64.3/DVWA/"
+base_url = "http://127.0.0.1/DVWA/"
 login_url = base_url + "login.php"
 csrf_urls = [
     base_url + "vulnerabilities/csrf/",
