@@ -6,6 +6,13 @@ from set_security import set_dvwa_security
 from openports import check_open_ports
 from missing_conf import check_security_headers, check_https_enforcement
 from Comin import test_command_injection
+from csrf import (
+    test_complete_compromise,
+    test_gaining_privileges,
+    test_bypassing_protection,
+    test_modifying_data,
+    test_dos
+    )
 import requests
 
 def check_security_misconfigurations(base_url):
@@ -39,6 +46,13 @@ def check_security_misconfigurations(base_url):
         
         print("Checking for command injection vulnerabilities...")
         test_command_injection(session, base_url)
+        
+        print("Checking for CSRF vulnerabilities...")
+        test_complete_compromise(session, base_url)
+        test_gaining_privileges(session, base_url)
+        test_bypassing_protection(session, base_url)
+        test_modifying_data(session, base_url)
+        test_dos(session, base_url)
 
     except Exception as e:
         print(f"An error occurred while testing for security misconfigurations: {e}")
