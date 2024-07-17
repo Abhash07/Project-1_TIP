@@ -11,7 +11,8 @@ from csrf import (
     test_gaining_privileges,
     test_bypassing_protection,
     test_modifying_data,
-    test_dos
+    test_dos,
+    check_csrfpay
     )
 import requests
 
@@ -53,6 +54,7 @@ def check_security_misconfigurations(base_url):
         test_bypassing_protection(session, base_url)
         test_modifying_data(session, base_url)
         test_dos(session, base_url)
+        check_csrfpay(session, base_url)
 
     except Exception as e:
         print(f"An error occurred while testing for security misconfigurations: {e}")
