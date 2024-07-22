@@ -18,7 +18,12 @@ def check_default_credentials(session, base_url, login_endpoint):
         soup = BeautifulSoup(response.content, 'html.parser')
         
         # Get the CSRF token from the login page
-        user_token = soup.find('input', {'name': 'user_token'})['value'] # type: ignore
+        user_token_input = soup.find('input', {'name': 'user_token'})
+        if not user_token_input:
+            print("CSRF token not found. Skipping this credential set.")
+            continue
+        
+        user_token = user_token_input['value'] # type: ignore
         
         login_data = {
             'username': username,
@@ -29,11 +34,7 @@ def check_default_credentials(session, base_url, login_endpoint):
         
         response = session.post(base_url + login_endpoint, data=login_data)
         
-        # Debug: Print login response content
-        print(f"Testing credentials {username}/{password}")
-        print("Login response:")
-        print(response.text)
-        
+        # Check for successful login without printing HTML content
         if "Welcome to Damn Vulnerable Web Application!" in response.text:
             print(f"Default credentials valid for {username}/{password}")
         else:
