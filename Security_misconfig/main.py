@@ -14,6 +14,7 @@ from csrf import (
     test_dos,
     check_csrfpay
     )
+from weak_sid import test_weak_session_ids
 import requests
 
 def check_security_misconfigurations(base_url):
@@ -26,9 +27,6 @@ def check_security_misconfigurations(base_url):
 
         print("Checking for directory listing...")
         check_directory_listing(session, base_url)
-
-        print("Checking for default credentials...")
-        check_default_credentials(session, base_url, 'login.php')
 
         print("Checking for sensitive files...")
         check_sensitive_files(session, base_url)
@@ -48,6 +46,9 @@ def check_security_misconfigurations(base_url):
         print("Checking for command injection vulnerabilities...")
         test_command_injection(session, base_url)
         
+        print("Checking for weak session ID vulnerabilities...")
+        test_weak_session_ids(session, base_url)
+        
         print("Checking for CSRF vulnerabilities...")
         test_complete_compromise(session, base_url)
         test_gaining_privileges(session, base_url)
@@ -55,6 +56,11 @@ def check_security_misconfigurations(base_url):
         test_modifying_data(session, base_url)
         test_dos(session, base_url)
         check_csrfpay(session, base_url)
+        
+        print("Checking for default credentials...")
+        check_default_credentials(session, base_url, 'login.php')
+
+        
 
     except Exception as e:
         print(f"An error occurred while testing for security misconfigurations: {e}")
