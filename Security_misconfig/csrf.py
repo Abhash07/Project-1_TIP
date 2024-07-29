@@ -4,15 +4,13 @@ from bs4 import BeautifulSoup
 def csrf_attack(session, base_url, endpoint, payload):
     response = session.get(base_url + endpoint)
     soup = BeautifulSoup(response.content, 'html.parser')
-    
-    # Find the CSRF token
-    user_token_input = soup.find('input', {'name': 'user_token'})
-    if user_token_input:
-        user_token = user_token_input['value']
+
+    if user_token_input := soup.find('input', {'name': 'user_token'}):
+        user_token = user_token_input['value'] # type: ignore
         payload['user_token'] = user_token
-    
+
     response = session.post(base_url + endpoint, data=payload)
-    
+
     return response
 
 def test_complete_compromise(session, base_url):
