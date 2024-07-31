@@ -66,5 +66,5 @@ def main(url):
 
 if __name__ == "__main__":
     # Example URL for testing
-    test_url = "http://localhost/dvwa/vulnerabilities/xss_d/?default=<script>alert('XSS')</script>"
+    test_url = "http://l27.0.0.1/DVWA"
     main(test_url)
