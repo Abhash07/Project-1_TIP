@@ -6,6 +6,7 @@ from set_security import set_dvwa_security
 from openports import check_open_ports
 from missing_conf import check_security_headers, check_https_enforcement
 from Comin import test_command_injection
+from CSP import  test_csp_bypass
 from csrf import (
     test_complete_compromise,
     test_gaining_privileges,
@@ -15,6 +16,7 @@ from csrf import (
     check_csrfpay
     )
 from weak_sid import test_weak_session_ids
+from buffer import test_buffer_overflow
 import requests
 
 def check_security_misconfigurations(base_url):
@@ -59,6 +61,12 @@ def check_security_misconfigurations(base_url):
         
         print("Checking for default credentials...")
         check_default_credentials(session, base_url, 'login.php')
+        
+        print ("Checking for Buffer Overflow")
+        test_buffer_overflow(session, base_url)
+        
+        print("CSP Bypass")
+        test_csp_bypass(session, base_url)
 
         
 
