@@ -6,7 +6,7 @@ def set_dvwa_security(session, base_url, security_level='low'):
     login_data = {
         'username': 'admin',
         'password': 'password',
-        'Login': 'Logi'
+        'Login': 'Login'
     }
     login_url = base_url + 'login.php'
     response = session.get(login_url)
