@@ -1,14 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 
-# Define XSS payloads
-xss_payloads = [
-    '<script>alert("XSS")</script>',
-    '"><script>alert("XSS")</script>',
-    "'><script>alert('XSS')</script>",
-    "<img src='x' onerror='alert(\"XSS\")'>",
-    "<svg/onload=alert(\"XSS\")>"
-]
+# Function to read payloads from a file
+def load_payloads(file_path):
+    with open(file_path, 'r') as file:
+        return [line.strip() for line in file.readlines()]
 
 # Function to scan reflected XSS
 def scan_reflected_xss(url, payloads, simulate_vulnerable=False):
@@ -65,8 +61,11 @@ def test_multivector_xss(url, simulate_vulnerable=False):
     return False
 
 # Main function to run all XSS scans
-def main(url, simulate_vulnerable=False):
+def main(url, payload_file, simulate_vulnerable=False):
     print(f"Starting XSS vulnerability scans on {url}...")
+
+    # Load the payloads from the file
+    xss_payloads = load_payloads(payload_file)
 
     # Scenario 1: Scan for reflected XSS
     print("Scanning for Reflected XSS...")
@@ -91,13 +90,17 @@ def main(url, simulate_vulnerable=False):
     print(f"XSS vulnerability scans completed for {url}.")
 
 if __name__ == "__main__":
+    # Path to the file containing payloads
+    payload_file = "xss_payloads.txt"
+
     # DVWA URLs for testing
     test_url = "http://localhost/DVWA/vulnerabilities/xss_r/"  # Adjust the URL based on the scenario
 
     # Simulate Vulnerable Scenario
     print("Scenario: Demonstrating a Vulnerable URL")
-    main(test_url, simulate_vulnerable=True)
+    main(test_url, payload_file, simulate_vulnerable=True)
 
     # Simulate Secure Scenario (Optional)
     # print("\nScenario: Demonstrating a Secure URL")
-    # main(test_url, simulate_vulnerable=False)
+    # main(test_url, payload_file, simulate_vulnerable=False)
+
