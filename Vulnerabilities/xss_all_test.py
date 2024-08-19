@@ -1,5 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # DVWA credentials
 dvwa_username = 'admin'
@@ -27,59 +31,64 @@ def dvwa_login(session, login_url):
 
     # Post the login data
     session.post(login_url, data=login_payload)
-    print("Logged in to DVWA.")
+    logging.info("Logged in to DVWA.")
 
 # Function to scan reflected XSS
 def scan_reflected_xss(session, url, payloads, simulate_vulnerable=False):
     for payload in payloads:
+        logging.info(f"Testing Reflected XSS with payload: {payload}")
         response = session.get(url, params={'name': payload})
         if simulate_vulnerable or payload in response.text:
-            print(f"[Reflected XSS] Vulnerability found at {url} with payload: {payload}")
+            logging.info(f"[Reflected XSS] Vulnerability found at {url} with payload: {payload}")
             return True
     return False
 
 # Function to scan stored XSS
 def scan_stored_xss(session, url, payloads, simulate_vulnerable=False):
     for payload in payloads:
+        logging.info(f"Testing Stored XSS with payload: {payload}")
         # Step 1: Submit the payload
         session.post(url, data={'mtxMessage': payload})
         # Step 2: Check if the payload is stored
         response = session.get(url)
         if simulate_vulnerable or payload in response.text:
-            print(f"[Stored XSS] Vulnerability found at {url} with payload: {payload}")
+            logging.info(f"[Stored XSS] Vulnerability found at {url} with payload: {payload}")
             return True
     return False
 
 # Function to scan DOM-based XSS
 def scan_dom_xss(session, url, payloads, simulate_vulnerable=False):
     for payload in payloads:
+        logging.info(f"Testing DOM-based XSS with payload: {payload}")
         full_url = f"{url}#{payload}"
         response = session.get(full_url)
         soup = BeautifulSoup(response.text, 'html.parser')
         # Simple check if payload is part of a script or an attribute
         if simulate_vulnerable or soup.find(string=lambda text: payload in text if text else False):
-            print(f"[DOM XSS] Vulnerability found at {url} with payload: {payload}")
+            logging.info(f"[DOM XSS] Vulnerability found at {url} with payload: {payload}")
             return True
     return False
 
 # Function to test bypassing basic filters (Using Obfuscated Payloads)
 def test_obfuscated_xss(session, url, simulate_vulnerable=False):
     obfuscated_payload = '"><svg/onload=alert("XSS")>'
+    logging.info(f"Testing Obfuscated XSS with payload: {obfuscated_payload}")
     response = session.get(url, params={'name': obfuscated_payload})
     if simulate_vulnerable or obfuscated_payload in response.text:
-        print(f"[Obfuscated XSS] Vulnerability found at {url} with payload: {obfuscated_payload}")
+        logging.info(f"[Obfuscated XSS] Vulnerability found at {url} with payload: {obfuscated_payload}")
         return True
     return False
 
 # Function to test Multi-Vector XSS attack
 def test_multivector_xss(session, url, simulate_vulnerable=False):
-    # Step 1: Inject into one form field
     hidden_payload = '<input type="hidden" name="hiddenField" value="<script>alert(\'Multi-Vector XSS\')"></input>'
+    logging.info(f"Testing Multi-Vector XSS with payload: {hidden_payload}")
+    # Step 1: Inject into one form field
     session.post(url, data={'message': hidden_payload})
     # Step 2: Check if the hidden field payload is executed
     response = session.get(url)
     if simulate_vulnerable or '<script>alert(\'Multi-Vector XSS\')' in response.text:
-        print(f"[Multi-Vector XSS] Vulnerability found at {url} with payload: {hidden_payload}")
+        logging.info(f"[Multi-Vector XSS] Vulnerability found at {url} with payload: {hidden_payload}")
         return True
     return False
 
@@ -89,32 +98,32 @@ def main(url, payload_file, simulate_vulnerable=False):
         # Log in to DVWA
         dvwa_login(session, url + 'login.php')
 
-        print(f"Starting XSS vulnerability scans on {url}...")
+        logging.info(f"Starting XSS vulnerability scans on {url}...")
 
         # Load the payloads from the file
         xss_payloads = load_payloads(payload_file)
 
         # Scenario 1: Scan for reflected XSS
-        print("Scanning for Reflected XSS...")
+        logging.info("Scanning for Reflected XSS...")
         scan_reflected_xss(session, url + 'vulnerabilities/xss_r/', xss_payloads, simulate_vulnerable)
 
         # Scenario 2: Scan for stored XSS
-        print("Scanning for Stored XSS...")
+        logging.info("Scanning for Stored XSS...")
         scan_stored_xss(session, url + 'vulnerabilities/xss_s/', xss_payloads, simulate_vulnerable)
 
         # Scenario 3: Scan for DOM-based XSS
-        print("Scanning for DOM-based XSS...")
+        logging.info("Scanning for DOM-based XSS...")
         scan_dom_xss(session, url + 'vulnerabilities/xss_d/', xss_payloads, simulate_vulnerable)
 
         # Scenario 4: Test bypassing basic filters (Obfuscated Payloads)
-        print("Testing Obfuscated XSS...")
+        logging.info("Testing Obfuscated XSS...")
         test_obfuscated_xss(session, url + 'vulnerabilities/xss_r/', simulate_vulnerable)
 
         # Scenario 5: Test Multi-Vector XSS attack
-        print("Testing Multi-Vector XSS...")
+        logging.info("Testing Multi-Vector XSS...")
         test_multivector_xss(session, url + 'vulnerabilities/xss_s/', simulate_vulnerable)
 
-        print(f"XSS vulnerability scans completed for {url}.")
+        logging.info(f"XSS vulnerability scans completed for {url}.")
 
 if __name__ == "__main__":
     # Path to the file containing payloads
@@ -124,7 +133,7 @@ if __name__ == "__main__":
     base_url = "http://localhost/DVWA/"
 
     # Simulate Vulnerable Scenario
-    print("Scenario: Demonstrating a Vulnerable URL")
+    logging.info("Scenario: Demonstrating a Vulnerable URL")
     main(base_url, payload_file, simulate_vulnerable=True)
 
 
