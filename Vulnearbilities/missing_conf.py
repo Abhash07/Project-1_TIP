@@ -42,3 +42,4 @@ if __name__ == "__main__":
     url = "http://127.0.0.1/dvwa/"  # Adjusted for local DVWA instance
     check_security_headers(url)
     check_https_enforcement(url)
+
