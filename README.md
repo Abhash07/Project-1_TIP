@@ -21,7 +21,7 @@ This toolkit is designed to automate the process of testing for various vulnerab
 ## Installation
 1. Clone this repository:
    ```
-   git clone https://github.com/your-username/dvwa-vulnerability-testing-toolkit.git
+   git clone [https://github.com/your-username/dvwa-vulnerability-testing-toolkit.git](https://github.com/Abhash07/
    ```
 2. Install required dependencies:
    ```
@@ -53,8 +53,7 @@ Ensure that the `base_url`, `dvwa_username`, and `dvwa_password` in `dvwa_sessio
 ## Disclaimer
 This tool is for educational purposes only. Only use it on applications you have permission to test. The authors are not responsible for any misuse or damage caused by this program.
 
-## Contributing
+## Contribution
 Contributions to improve the toolkit are welcome. Please feel free to submit pull requests or create issues for bugs and feature requests.
 
-## License
-[Specify your license here, e.g., MIT, GPL, etc.]
+
