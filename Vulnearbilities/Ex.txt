@@ -1,0 +1,36 @@
+Test1.py:
+This script performs basic checks for various security misconfiguration vulnerabilities by making HTTP GET requests to a set of predefined URLs. The script includes testing for:
+
+Default accounts/passwords
+Outdated software
+Unprotected files and directories
+Unused features
+Security misconfigurations
+Directory traversal
+
+Key Functions:
+test_misconfiguration(target_url): Sends a GET request to the specified target_url with configuration parameters to see if any misconfiguration can be detected.
+main(): Iterates over a list of test URLs, calling test_misconfiguration for each to check for vulnerabilities.
+Test2.py:
+This script extends the basic tests by including form extraction and more complex payload testing. It checks web forms for security misconfigurations and scans URLs for potential vulnerabilities.
+
+Key Functions:
+login_dvwa(session, url, username, password): Logs into the DVWA application.
+get_all_forms(url): Retrieves all forms from the specified URL.
+get_details(form): Extracts details from a form, such as method, action, and inputs.
+is_misconfigured(response): Checks the response for indicators of misconfiguration.
+scan_misconfiguration(url): Tests the URL and its forms for various misconfiguration vulnerabilities.
+start_scan(): Starts the scanning process using multiple threads for efficiency.
+start_misconfig_scan(): Initializes the scanning process, logs into DVWA, and begins scanning.
+Test3.py:
+This script is the most comprehensive of the three, combining URL and form-based testing for security misconfigurations. It also includes advanced payloads to check for more complex misconfiguration scenarios.
+
+Key Functions:
+login_dvwa(session, url, username, password): Logs into the DVWA application.
+get_all_forms(url): Retrieves all forms from the specified URL.
+get_details(form): Extracts details from a form, such as method, action, and inputs.
+is_misconfigured(response): Checks the response for indicators of misconfiguration.
+scan_misconfiguration(url): Tests the URL and its forms for various misconfiguration vulnerabilities, including advanced payloads.
+test_advanced_misconfig(url, form_details): Tests forms with advanced payloads for more complex misconfigurations.
+start_scan(): Starts the scanning process using multiple threads for efficiency.
+start_misconfig_scan(): Initializes the scanning process, logs into DVWA, creates a log file, and begins scanning.
